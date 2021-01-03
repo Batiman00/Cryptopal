@@ -16,4 +16,4 @@ const score = (stringHex) => {
     return arr;
 };
 /*Função para testar as chaves*/
-const singleByteXor = (text, key) => (text.match(/.{1,2}/g).reduce((acc,curr) => acc += String.fromCharCode(parseInt(curr, 16) ^ key.charCodeAt(0)),''));
+const singleByteXor = (textHex, key) => (textHex.match(/.{1,2}/g).reduce((acc,curr) => acc += String.fromCharCode(parseInt(curr, 16) ^ key.charCodeAt(0)),''));
