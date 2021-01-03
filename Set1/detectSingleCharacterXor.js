@@ -1,4 +1,4 @@
-const b64 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-/'.split("");
+const b64 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'.split("");
 
 const score = (a) => {
     let arr = a.match(/.{1,2}/g).sort();
@@ -17,8 +17,4 @@ const score = (a) => {
     return arr2;
 };
 
-const singleByteXor = (text, key) => {
-    let bin = text.match(/.{1,2}/g).map(x => parseInt(x, 16));
-    let result = bin.map(x => x ^= key.charCodeAt(0));
-    return result.map(x => String.fromCharCode(x));
-};
+const singleByteXor = (text, key) => (text.match(/.{1,2}/g).reduce((acc,curr) => acc += String.fromCharCode(parseInt(curr, 16) ^ key.charCodeAt(0)),''));
