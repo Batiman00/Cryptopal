@@ -25,7 +25,7 @@ const score = (stringHex) => {
     }
     avrg /= stringHex.length;
     var variance = arr.reduce((acc, curr) => acc += (curr.frequency - avrg) ** 2, 0) / arr.length;
-    var coincidencia = arr.reduce((acc, curr) => acc += (curr.frequency * (curr.frequency - 1)) / (stringHex.length * (stringHex.length - 1)), 0)
+    coincidencia = arr.reduce((acc, curr) => acc += (curr.frequency * (curr.frequency - 1)) / (stringHex.length * (stringHex.length - 1)), 0)
     arr.unshift({ average: avrg, variance: variance, deviation: Math.sqrt(variance), IC: coincidencia });
 
     return arr;
@@ -42,9 +42,11 @@ const b64ToHex = (str = '') => {
 
 /*Função que inverte uma operação de xor*/
 const findChar = (char1, char2) => (String.fromCharCode(parseInt(char1, 16) ^ char2.charCodeAt(0)));
+
 /*Função para ordenar, em ordem crescrente de 
 frequência, os elementos criados pela função score*/
 const Compare = (a, b) => (b.frequency - a.frequency);
+
 /*Função que,para um dado tamanha de palavra,
 acha os caractéres mais prováveis de terem sido usados 
 para codificar a mensagem.
