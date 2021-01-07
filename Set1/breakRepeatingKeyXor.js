@@ -34,12 +34,12 @@ const score = (stringHex) => {
 const multByteXor = (textHex, key) => (textHex.match(/.{1,2}/g).reduce((acc, curr, index) => acc += String.fromCharCode(parseInt(curr, 16) ^ key[index % key.length].charCodeAt(0)), ''));
 /*Função de conversão de bases*/
 const b64ToHex = (str = '') => {
-    var total = str.split('').map(x => b64.indexOf(x).toString(2).padStart(6, 0)).join("");
+    let total = str.split('').map(x => b64.indexOf(x) < 0 ? "" : b64.indexOf(x).toString(2).padStart(6, 0)).join("");
+    if(total.match(/.{1,4}/g).slice(-1) == 0){ total = total.match(/.{1,4}/g).slice(0,-1).join('')}
     total = total.match(/.{1,4}/g).reduce((acc, curr) => acc += parseInt(curr, 2).toString(16), '');
 
     return total;
 };
-
 /*Função que inverte uma operação de xor*/
 const findChar = (char1, char2) => (String.fromCharCode(parseInt(char1, 16) ^ char2.charCodeAt(0)));
 
