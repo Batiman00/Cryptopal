@@ -40,12 +40,6 @@ const b64ToHex = (str = '') => {
 
     return total;
 };
-/*Função que inverte uma operação de xor*/
-const findChar = (char1, char2) => (String.fromCharCode(parseInt(char1, 16) ^ char2.charCodeAt(0)));
-
-/*Função para ordenar, em ordem crescrente de 
-frequência, os elementos criados pela função score*/
-const Compare = (a, b) => (b.frequency - a.frequency);
 
 /*Função que,para um dado tamanha de palavra,
 acha os caractéres mais prováveis de terem sido usados 
@@ -53,13 +47,16 @@ para codificar a mensagem.
 No caso língua inglesa, adotar commonLetters =' aetoinrs';*/
 const search = (data, keysize, commonLetters, start = 1) => {
 
-    let letter = commonLetters.split('');
+    var letter = commonLetters.split('');
 
-    for (let z = 1; z <= keysize; z++) {
-        let array = score(takeletter(data, z, keysize)).sort(Compare);
-        console.log("\n valor mais comum = " + array[start].key + " RF: " + array[start].rFrequency);
-        for (let y = 0; y < letter.length; y++) {
-            console.log("Possível" + z + "ª" + " chave: " + findChar(array[start].key, letter[y]) + ' ou ' + findChar(array[start + 1].key, letter[y]) + ' ou ' + findChar(array[start + 2].key, letter[y]));
+    function findChar(char1, char2) { return String.fromCharCode(parseInt(char1, 16) ^ char2.charCodeAt(0)) }
+    function compare(a, b) { b.frequency - a.frequency }
+
+    for (var z = 1; z <= keysize; z++) {
+        var array = score(takeletter(data, z, keysize)).sort(compare);
+        console.log(`\nValor mais comum = ${array[start].key} RF: ${array[start].rFrequency.toFixed(3)}`);
+        for (var y = 0; y < letter.length; y++) {
+            console.log(`Possível ${z + 1}ª chave: ${findChar(array[start].key, letter[y])} ou ${findChar(array[start + 1].key, letter[y])} ou ${findChar(array[start + 2].key, letter[y])}`);
         }
     }
 }
