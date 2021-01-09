@@ -1,31 +1,11 @@
 const b64 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'.split("");
-/*Função que separa uma string em blocos
-e escolhe o n-ésimo carcteres de cada bloco */
-const takeletter = (stringHex, n, tam) => {
-    var result = '';
-    var stringHex = stringHex.match(/.{1,2}/g);
-
-    for (var z = n - 1; z < stringHex.length; z += tam) {
-        result += stringHex[z];
-    }
-
-    return result;
-}
-/*Função de análise de frequência de caracteres em textos*/
 const score = (stringHex) => {
-    var stringHex = stringHex.match(/.{1,2}/g).sort();
-    let arr = [], avrg = 0, coincidencia = 0;
-    for (let i = 0, j = 0; i < stringHex.length; i++) {
-        if (stringHex[i] !== stringHex[i + 1]) {
-            let n = i - j + 1;
-            arr.push({ key: stringHex[i], frequency: n, rFrequency: n / stringHex.length });
-            avrg += n;
-            j = i + 1;
-        }
-    }
-    avrg /= stringHex.length;
+
+    var arr = stringHex.match(/.{1,2}/g).sort().join('').match(/(..)\1*/g).map(x => ({ key: x.slice(0, 2), frequency: x.length / 2 }))
+    var avrg = stringHex.length / (2 * arr.length);
     var variance = arr.reduce((acc, curr) => acc += (curr.frequency - avrg) ** 2, 0) / arr.length;
-    coincidencia = arr.reduce((acc, curr) => acc += (curr.frequency * (curr.frequency - 1)) / (stringHex.length * (stringHex.length - 1)), 0)
+    var coincidencia = arr.reduce((acc, curr) => acc += (curr.frequency * (curr.frequency - 1)) / ((stringHex.length/2) * ((stringHex.length/2) - 1)), 0)
+
     arr.unshift({ average: avrg, variance: variance, deviation: Math.sqrt(variance), IC: coincidencia });
 
     return arr;
@@ -51,6 +31,7 @@ const search = (data, keysize, commonLetters, start = 1) => {
 
     function findChar(char1, char2) { return String.fromCharCode(parseInt(char1, 16) ^ char2.charCodeAt(0)) }
     function compare(a, b) { b.frequency - a.frequency }
+    function takeletter(stringHex, n, tam) { return stringHex.match(new RegExp(`.{1,${2 * tam}}`, "g")).reduce((acc, curr) => acc += curr.slice(2 * (n - 1), 2 * (n + 1)), '') }
 
     for (var z = 1; z <= keysize; z++) {
         var array = score(takeletter(data, z, keysize)).sort(compare);
