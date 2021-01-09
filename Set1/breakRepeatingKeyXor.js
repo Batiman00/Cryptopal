@@ -1,4 +1,5 @@
 const b64 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'.split("");
+/*Função de análise de frequência de caracteres*/
 const score = (stringHex) => {
 
     var arr = stringHex.match(/.{1,2}/g).sort().join('').match(/(..)\1*/g).map(x => ({ key: x.slice(0, 2), frequency: x.length / 2 }))
