@@ -13,7 +13,7 @@ test('teste 3', () => {
     expect(hexTo64("371d39121605584f48217235ee1e0602445c162e4942254c071954"))
     .toBe("Nx05EhYFWE9IIXI17h4GAkRcFi5JQiVMBxlU");
 });
-test('teste 1', () => {
+test('teste 4', () => {
     expect(hexTo64("5f5731e5203116ee131a4a4b24112cef5d0822f035e6547d3a0014462f26"))
     .toBe("X1cx5SAxFu4TGkpLJBEs710IIvA15lR9OgAURi8m");
 });
