@@ -1,0 +1,11 @@
+{
+  "name": "pkcs_7",
+  "version": "1.0.0",
+  "description": "",
+  "main": "PKCS.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC"
+}
