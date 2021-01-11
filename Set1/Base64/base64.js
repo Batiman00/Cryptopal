@@ -8,3 +8,5 @@ const hexTo64 = (num = '') => {
 
   return total; 
 };
+
+module.exports = hexTo64
