@@ -29,7 +29,9 @@ class CryptoAnalysis {
   };
 
   static findChar(char1, char2) { return String.fromCharCode(parseInt(char1, 16) ^ char2.charCodeAt(0)) }
-
+  /*Função que,para um dado tamanha de palavra,
+  acha os caractéres mais prováveis de terem sido usados 
+  para codificar a mensagem.*/
   printGuesses(start = 1) {
     for (var z = 1; z <= this.keySize; z++) {
       var array = this.score(this.takeletter(z, this.keySize)).sort((a, b) => (b.frequency - a.frequency));
@@ -39,7 +41,7 @@ class CryptoAnalysis {
       }
     }
   }
-
+  /*Mostra a chave mais provável  */
   default() {
 
     var guess = '';
@@ -50,7 +52,7 @@ class CryptoAnalysis {
     }
     return guess;
   }
-
+  /*Função de análise de frequência de caracteres*/
   score = (stringHex) => {
 
     var arr = stringHex.match(/.{1,2}/g).sort().join('').match(/(..)\1*/g).map(x => ({ key: x.slice(0, 2), frequency: x.length / 2 }))
@@ -62,7 +64,7 @@ class CryptoAnalysis {
 
     return arr;
   };
-
+  /*Mostra os indices de coincidência e desvio padrão para diferentes tamanhos de chave */
   findKeySize(ini = 2, final = 50) {
     final = final || Math.min(50, this.text / 5);
     for (var n = ini; n <= final; n++) {
@@ -71,7 +73,7 @@ class CryptoAnalysis {
       console.log(`${n} Deviation:  ${this.score(temp)[0].deviation}\n`);
     }
   }
-
+  /*Funções de conversão de bases*/
   static asciiToHex(string) { return string.split('').reduce((acc, curr) => acc += curr.charCodeAt(0).toString(16).padStart(2, 0), '') };
   static b64ToHex(str) {
 
