@@ -1,0 +1,11 @@
+{
+  "name": "cbc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "CBC.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC"
+}
