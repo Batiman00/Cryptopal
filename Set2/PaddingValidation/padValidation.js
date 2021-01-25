@@ -6,3 +6,4 @@ const padValidation = (string) => {
 
     return 'Correct padding !!'
 }
+module.exports = padValidation;
