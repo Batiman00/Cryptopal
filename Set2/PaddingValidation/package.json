@@ -1,0 +1,14 @@
+{
+  "name": "padddingvalidation",
+  "version": "1.0.0",
+  "description": "Tesst for padding validation (PKCS#7)",
+  "main": "padValidation.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "PKCS"
+  ],
+  "author": "Lucas Alexandre",
+  "license": "ISC"
+}
